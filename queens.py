@@ -1,4 +1,3 @@
-"awdwad"
 class NQueens:
 	def __init__(self, n):
 		try:
