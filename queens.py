@@ -49,7 +49,7 @@ class NQueens:
 				print(self.results[i][j])
 		
 
-q = NQueens(8)
+q = NQueens(10)
 q.Print()
 print("Count: ",q.Count())
 print("Time: {:0.3} s".format(q.Time()))
