@@ -22,10 +22,10 @@ class NQueens:
 		queens = [0 for x in range(n)]
 		startT = self.time.time()
 		for iters in self.itertools.permutations([x for x in range(n)]):
-			field = [[0]*n for i in range(n)]
 			for j in range(n):
 				queens[j]=[j, iters[j]]
 			if self.Check(queens):
+				field = [[0]*n for i in range(n)]
 				for j in range(n):
 					field[j][iters[j]] = 1
 				self.results.append(field)
