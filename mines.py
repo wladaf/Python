@@ -92,8 +92,9 @@ class MainWindow(QWidget):
                 for j in range(self.N):
                     if not(i == _i and j == _j):
                         if random.randint(0, self.N*self.N) < self.N and self.mines <= 8:
-                            self.field[i][j] = -1
-                            self.mines += 1
+                            if self.field[i][j] == 99:
+                                self.field[i][j] = -1
+                                self.mines += 1
 
 
     def NewGame(self):
@@ -132,7 +133,8 @@ class MainWindow(QWidget):
                 if self.field[i][j] == 99:
                     sum += 1
         if sum == 0:
-            win = True
+            self.win = True
+        print(sum)
 
 
 
