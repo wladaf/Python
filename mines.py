@@ -91,7 +91,7 @@ class MainWindow(QWidget):
             for i in range(self.N):
                 for j in range(self.N):
                     if not(i == _i and j == _j):
-                        if self.mines < self.minesCount and random.randint(0, self.N*self.N) < self.N/2:
+                        if self.mines < self.minesCount and random.randint(0, self.N*self.N) < self.N:
                             if self.field[i][j] == 99:
                                 self.field[i][j] = -1
                                 self.mines += 1
@@ -140,6 +140,11 @@ class MainWindow(QWidget):
                     sum += 1
         if sum == 0:
             self.win = True
+            for i in range(self.N):
+                for j in range(self.N):
+                    if self.field[i][j] == -1:
+                        self.buttons[i][j].setText("X")
+                        self.buttons[i][j].setStyleSheet("background-color: #00EE00;border: 1px solid black;")
             self.Label.setText("You Win!")
 
 
