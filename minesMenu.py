@@ -27,12 +27,12 @@ class Menu(QWidget):
 
         self.btn12x12 = QPushButton("12x12", self)
         self.btn12x12.clicked.connect(functools.partial(self.Click, (12, 21)))
-        self.btn12x12.setGeometry(10 + self.btnWidth, 10, self.btnWidth, self.btnHeight)
+        self.btn12x12.setGeometry(10 + self.btnWidth + 10, 10, self.btnWidth, self.btnHeight)
         self.btn12x12.setStyleSheet('font-size: 32pt;')
 
         self.btn16x16 = QPushButton("16x16", self)
         self.btn16x16.clicked.connect(functools.partial(self.Click, (16, 36)))
-        self.btn16x16.setGeometry(10 + self.btnWidth + 10 + self.btnWidth, 10, self.btnWidth, self.btnHeight)
+        self.btn16x16.setGeometry(10 + self.btnWidth + 10 + self.btnWidth + 10, 10, self.btnWidth, self.btnHeight)
         self.btn16x16.setStyleSheet('font-size: 32pt;')
 
         self.show()

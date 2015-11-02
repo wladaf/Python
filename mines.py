@@ -87,11 +87,11 @@ class MainWindow(QWidget):
     def PlaceMines(self, _i, _j):
         self.mines = 0
         self.field = [[99 for y in range(self.N)] for x in range(self.N)]
-        while self.mines <= self.minesCount:
+        while self.mines < self.minesCount:
             for i in range(self.N):
                 for j in range(self.N):
                     if not(i == _i and j == _j):
-                        if self.mines <= self.minesCount and random.randint(0, self.N*self.N) < self.N/2:
+                        if self.mines < self.minesCount and random.randint(0, self.N*self.N) < self.N/2:
                             if self.field[i][j] == 99:
                                 self.field[i][j] = -1
                                 self.mines += 1
@@ -113,10 +113,10 @@ class MainWindow(QWidget):
             self.buttons[i][j].setStyleSheet("background-color: #EE0000;border: 1px solid black;")
         elif self.field[i][j] == 0:
             self.buttons[i][j].setText("")
-            self.buttons[i][j].setStyleSheet("background-color: #E0E0FF;border: 1px solid black;")
+            self.buttons[i][j].setStyleSheet("background-color: #00CCFF;border: 1px solid black;")
         elif self.field[i][j] == 99:
             self.buttons[i][j].setText("")
-            self.buttons[i][j].setStyleSheet("background-color: #B0B0B0;border: 1px solid black;")
+            self.buttons[i][j].setStyleSheet("background-color: #A0A0A0;border: 1px solid black;")
         else:
             self.buttons[i][j].setText(str(self.field[i][j]))
             self.buttons[i][j].setStyleSheet("background-color: #FFFFFF;border: 1px solid black;")
@@ -125,7 +125,11 @@ class MainWindow(QWidget):
     def CheckLose(self, i, j):
         if self.field[i][j] == -1:
             self.gameOver = True
-            self.buttons[i][j].setText("X")
+            for i in range(self.N):
+                for j in range(self.N):
+                    if self.field[i][j] == -1:
+                        self.buttons[i][j].setText("X")
+                        self.buttons[i][j].setStyleSheet("background-color: #EE0000;border: 1px solid black;")
             self.Label.setText("You Lose!")
 
     def WinCheck(self):
