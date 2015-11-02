@@ -7,31 +7,31 @@ import functools
 
 class MainWindow(QWidget):
 
-    def __init__(self, N):
+    def __init__(self, N, minesCount, mainWindow):
         super().__init__()
+        self.MW = mainWindow
         self.N = N
         self.btnSize = 40
-        self.minesCount = N
+        self.minesCount = minesCount
         self.initUI()
         self.NewGame()
         self.field = []
+
        
-
-
-
     def initUI(self):
         self.move(300, 300)
         self.setWindowTitle('Miner')
         self.setWindowIcon(QIcon('icon.png'))
         self.setFixedSize(self.btnSize*self.N+20, self.btnSize*self.N+20  + self.btnSize + 10)
 
-        self.bigBtnSize = (self.frameGeometry().width()-10)/3-10
+        self.bigBtnSize = (self.frameGeometry().width() - 10)/3 - 10
 
         self.buttons = [[None]*self.N for x in range(self.N)]
         for i in range(self.N):
             for j in range(self.N):
                 self.buttons[i][j] = QPushButton('', self)
                 self.buttons[i][j].clicked.connect(functools.partial(self.Step, i, j))
+                #self.buttons[i][j].customContextMenuRequested.connect(functools.partial(self.Step, i, j))
                 self.buttons[i][j].setGeometry(10 + i*self.btnSize, 10 + j*self.btnSize, self.btnSize, self.btnSize)
                 self.buttons[i][j].clearFocus()
 
@@ -44,7 +44,7 @@ class MainWindow(QWidget):
         self.Label.setAlignment(Qt.AlignCenter)
  
         DiffBtn = QPushButton("Difficulty", self)
-        #Diff.clicked.connect(self.Difficulty)
+        DiffBtn.clicked.connect(self.Difficulty)
         DiffBtn.setGeometry(10 + self.bigBtnSize + 10 + self.bigBtnSize + 10, 20 + self.N*self.btnSize, self.bigBtnSize, self.btnSize)
 
         self.show()
@@ -78,18 +78,10 @@ class MainWindow(QWidget):
             
         
 
-    '''def Difficulty(self):
-        #super().__init__()
-        self.N = 8
-        self.btnSize = 40
-        self.initUI()
-        self.NewGame()
-        self.field = []
-        for i in range(self.N):
-            for j in self.buttons[i]:
-                layout.removeWidget(j)
-                self.j.deleteLater()
-                self.j = None.deleteLater()'''
+    def Difficulty(self):
+        
+        self.MW.show()
+        self.hide()
 
 
     def PlaceMines(self, _i, _j):
@@ -148,9 +140,8 @@ class MainWindow(QWidget):
 
 
 
-
 if __name__ == '__main__':
 
     app = QApplication(sys.argv)
-    ex = MainWindow(8)
+    ex = MainWindow(16)
     sys.exit(app.exec_())
